@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  */
 public class App extends Application {
     
-    static final short TAM_TABLERO = (Ficha.TAM_FICHA)*8+20;
+    static final short TAM_TABLERO = (Ficha.TAM_FICHA)*8;
     
     @Override
     public void start(Stage stage) {
@@ -23,11 +23,8 @@ public class App extends Application {
         root.getChildren().add(tablero);
         
         Ficha ficha = new Ficha(1);
-        tablero.getChildren().add(ficha);
         
         Ficha ficha2 = new Ficha(2);
-        ficha2.setLayoutX(30);
-        ficha2.setLayoutY(30);
         
 
     }
