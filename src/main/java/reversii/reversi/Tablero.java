@@ -10,33 +10,56 @@ import javafx.scene.shape.Line;
  *
  * @author noe
  */
-public class Tablero extends Pane{
+public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 10 s
+    
+    byte turno = 1;//El primer turno es del jugador Blanco
     
     public Tablero(){
-        for(int i=0; i<9; i++){
-            Line line = new Line(Ficha.TAM_FICHA*i, i,
+        for(int i=0; i<9; i++){//Líneas verticales
+            Line line = new Line(Ficha.TAM_FICHA*i, 0,
                     Ficha.TAM_FICHA*i, (Ficha.TAM_FICHA)*8);
             this.getChildren().add(line);
         }
-        for(int i=0; i<9; i++){
-            Line line = new Line(i, Ficha.TAM_FICHA*i,
+        for(int i=0; i<9; i++){//Líneas horizontales
+            Line line = new Line(0, Ficha.TAM_FICHA*i,
                     (Ficha.TAM_FICHA)*8, Ficha.TAM_FICHA*i);
             this.getChildren().add(line);
         }
+        
+        //Las 4 fichas del principio de la partida, que están siempre
+        colocarFicha(3, 3, 1);//Blancas
+        colocarFicha(4, 4, 1);
+        colocarFicha(4, 3, -1);//Negras
+        colocarFicha(3, 4, -1);
+        
         this.setOnMouseClicked((MouseEvent mouseEvent) -> {
             System.out.println("Mouse clicked X : Y -> "+
                     mouseEvent.getX() + ", " + mouseEvent.getY());
+            
             int clickX = (int) mouseEvent.getX();
             int columna = clickX / Ficha.TAM_FICHA;
             System.out.println("Columna " + columna);
-            colocarFicha(columna, 2);
+            
+            int clickY = (int) mouseEvent.getY();
+            int fila = clickY / Ficha.TAM_FICHA;
+            System.out.println("Fila " + fila);
+            
+            colocarFicha(columna, fila, turno);
+            turno *= -1;
+            
         });
     }
     
-    private void colocarFicha(int columna, int jugador) {
+    private void colocarFicha(int columna, int fila, int jugador) {
         Ficha ficha = new Ficha(jugador);
         ficha.setLayoutX(columna * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
-        ficha.setLayoutY(Ficha.TAM_FICHA/2);
+        ficha.setLayoutY(fila * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
         this.getChildren().add(ficha);
     }
+    
+//    private void conseguirGiro(double escalaFichas){
+//        escalaFichas --;
+//        this.setScaleX(1);
+//    }
+
 }

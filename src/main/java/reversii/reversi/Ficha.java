@@ -18,19 +18,21 @@ public class Ficha extends Group {
     public Ficha(int numJugador){
         Circle circle1 = new Circle();
         circle1.setRadius(TAM_FICHA/2);
+        circle1.setFill(Color.BLACK);
         this.getChildren().add(circle1);
         
         Circle circle2 = new Circle();
-        circle2.setRadius(TAM_FICHA * 0.35);
+        circle2.setRadius(TAM_FICHA * 0.48);
         this.getChildren().add(circle2);
         
         
         if(numJugador==1){
-            circle1.setFill(Color.RED);
-            circle2.setFill(Color.web("0x8B0000"));
+            circle2.setFill(Color.rgb(230, 230, 230));//White, player 1
         } else {
-            circle1.setFill(Color.BLUE);
-            circle2.setFill(Color.rgb(0, 0, 175));
+            circle2.setFill(Color.rgb(0, 0, 0));//Black, player 2
         }
+        
+        double escalaFichas = 1;
+        this.setScaleX(escalaFichas);
     }
 }

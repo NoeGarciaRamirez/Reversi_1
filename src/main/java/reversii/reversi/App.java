@@ -16,15 +16,18 @@ public class App extends Application {
     public void start(Stage stage) {
         StackPane root = new StackPane();
         var scene = new Scene(root, TAM_TABLERO, TAM_TABLERO);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        
         
         Tablero tablero = new Tablero();
         root.getChildren().add(tablero);
         
+        
         Ficha ficha = new Ficha(1);
         
-        Ficha ficha2 = new Ficha(2);
+        Ficha ficha2 = new Ficha(-1);
         
 
     }
