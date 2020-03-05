@@ -12,9 +12,12 @@ import javafx.scene.shape.Line;
  */
 public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 10 s
     
-    byte turno = 1;//El primer turno es del jugador Blanco
+    int turno = 1;//El primer turno es del jugador Blanco
+    Logica logica;
     
     public Tablero(){
+        logica = new Logica();
+        
         for(int i=0; i<9; i++){//Líneas verticales
             Line line = new Line(Ficha.TAM_FICHA*i, 0,
                     Ficha.TAM_FICHA*i, (Ficha.TAM_FICHA)*8);
@@ -47,19 +50,27 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
             colocarFicha(columna, fila, turno);
             turno *= -1;
             
+            logica.mostrarConsola();
+            
         });
     }
     
     private void colocarFicha(int columna, int fila, int jugador) {
+//        if ((columna != ) && (fila != )){
+//            System.out.println("No puedes colocar la ficha aquí");
+//        } else {
         Ficha ficha = new Ficha(jugador);
         ficha.setLayoutX(columna * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
         ficha.setLayoutY(fila * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
         this.getChildren().add(ficha);
+        logica.colocarFicha(columna, fila, jugador);
+        }
     }
+    
     
 //    private void conseguirGiro(double escalaFichas){
 //        escalaFichas --;
 //        this.setScaleX(1);
 //    }
 
-}
+

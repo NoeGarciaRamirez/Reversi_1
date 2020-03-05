@@ -15,7 +15,7 @@ public class Ficha extends Group {
     static final short TAM_FICHA = 40;
     
         //Método constructor
-    public Ficha(int numJugador){
+    public Ficha(int Jugador){
         Circle circle1 = new Circle();
         circle1.setRadius(TAM_FICHA/2);
         circle1.setFill(Color.BLACK);
@@ -26,7 +26,7 @@ public class Ficha extends Group {
         this.getChildren().add(circle2);
         
         
-        if(numJugador==1){
+        if(Jugador==1){
             circle2.setFill(Color.rgb(230, 230, 230));//White, player 1
         } else {
             circle2.setFill(Color.rgb(0, 0, 0));//Black, player 2
