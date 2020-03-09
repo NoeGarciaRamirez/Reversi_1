@@ -2,7 +2,9 @@ package reversii.reversi;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import static javafx.scene.paint.Color.RED;
 import javafx.stage.Stage;
 
 /**
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 public class App extends Application {
     
     static final short TAM_TABLERO = (Ficha.TAM_FICHA)*8;
+    static Object errorFicha;
     
     @Override
     public void start(Stage stage) {
@@ -29,7 +32,6 @@ public class App extends Application {
         
         Ficha ficha2 = new Ficha(-1);
         
-
     }
 
     public static void main(String[] args) {
