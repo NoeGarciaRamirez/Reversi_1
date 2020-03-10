@@ -28,9 +28,28 @@ public class Logica {
             cuadricula [columna][fila] = jugador;
     }
     
-    private void conseguirGiro(double escalaFichas){
-        if (escalaFichas >= -1){
-            escalaFichas --;
+    public int getNumFichasRaya(int fila, int columna){
+        int jugador = cuadricula[columna][fila];
+        int contadorFichasVueltas = 0;
+        int i = 1;
+        while (cuadricula[columna + i][fila] != jugador && cuadricula[columna - i][fila] != 0){
+            contadorFichasVueltas ++ ;
+            i++;
         }
+        
+        //
+//        i = 1;
+//        while (cuadricula[columna - i][fila] != jugador && cuadricula[columna - i][fila] != 0){
+//            contadorFichasVueltas ++ ;
+//            i++;
+//        }
+        //
+        return contadorFichasVueltas;
     }
+    
+//    private void conseguirGiro(double escalaFichas){
+//        if (escalaFichas >= -1){
+//            escalaFichas --;
+//        }
+//    }
 }
