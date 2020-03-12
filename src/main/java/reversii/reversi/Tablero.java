@@ -26,6 +26,7 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
     App app;
 
     public Tablero(){
+        //Label que muestra en pantalla que no puedes colocar la ficha en ese sitio
         Label errorFicha = new Label();
         errorFicha.relocate(TAM_TABLERO/2 - 50, TAM_TABLERO/2 - 50);
         errorFicha.setTextFill(RED);
@@ -66,28 +67,55 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
 
             logica.mostrarConsola();
 
-            timeline = new Timeline(
-                new KeyFrame(Duration.seconds(3), e -> {
-                    errorFicha.setVisible(true);
-                })
-            );
-            timeline.stop();
+//            timeline = new Timeline(
+//                new KeyFrame(Duration.seconds(3), e -> {
+//                    errorFicha.setVisible(true);
+//                })
+//            );
+//            timeline.stop();
         });
     }
 
     public void colocarFicha(int columna, int fila, int jugador) {
+        //Comprueba si hay una ficha donde haces click
         if (Logica.cuadricula [columna][fila] == 1 || Logica.cuadricula [columna][fila] == -1){
             System.out.println("No puedes colocar la ficha aquí");
             timeline.play();
         } else {
+            //Coloca la ficha correspondiente, dependiendo del jugador
             Ficha ficha = new Ficha(jugador);
             ficha.setLayoutX(columna * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
             ficha.setLayoutY(fila * Ficha.TAM_FICHA + Ficha.TAM_FICHA * 0.5);
             this.getChildren().add(ficha);
             logica.colocarFicha(columna, fila, jugador);
             
-            int numFichasVuelta = logica.getNumFichasRaya(fila, columna);
-            System.out.println("Número de fichas a dar vuelta: " + numFichasVuelta);
+            //Comprobar la cantidad de fichas a las que se le dan la vuelta alrededor de la
+            //ficha que acabamos de colocar
+            
+            //Comprueba fichas en Horizontal hacia la Derecha
+            int numFichasVueltaHD = logica.getNumFichasDarVuelta(fila, columna, 1, 0);
+            System.out.println("Número de fichas a dar vuelta Horizontal Derecha: " + numFichasVueltaHD);
+            //Comprueba fichas en Horizontal hacia la Izquierda
+            int numFichasVueltaHI = logica.getNumFichasDarVuelta(fila, columna, -1, 0);
+            System.out.println("Número de fichas a dar vuelta Horizontal Izquierda: " + numFichasVueltaHI);
+            //Comprueba fichas en Vertical hacia Encima
+            int numFichasVueltaVE = logica.getNumFichasDarVuelta(fila, columna, 0, -1);
+            System.out.println("Número de fichas a dar vuelta Vertical Encima: " + numFichasVueltaVE);
+            //Comprueba fichas en Vertical hacia Abajo
+            int numFichasVueltaVA = logica.getNumFichasDarVuelta(fila, columna, 0, 1);
+            System.out.println("Número de fichas a dar vuelta Vertical Abajo: " + numFichasVueltaVA);
+            //Comprueba fichas en Diagonal hacia la Derecha Abajo, desde 0,0
+            int numFichasVueltaDDA = logica.getNumFichasDarVuelta(fila, columna, 1, 1);
+            System.out.println("Número de fichas a dar vuelta Diagonal derecha abajo: " + numFichasVueltaDDA);
+            //Comprueba fichas en Diagonal hacia la Derecha Encima, desde 0,0
+            int numFichasVueltaDDE = logica.getNumFichasDarVuelta(fila, columna, 1, -1);
+            System.out.println("Número de fichas a dar vuelta Diagonal derecha arriba: " + numFichasVueltaDDE);
+            //Comprueba fichas en Diagonal hacia la Izquierda Abajo, desde 0,0
+            int numFichasVueltaDIA = logica.getNumFichasDarVuelta(fila, columna, -1, 1);
+            System.out.println("Número de fichas a dar vuelta Diagonal izquierda abajo: " + numFichasVueltaDIA);
+            //Comprueba fichas en Diagonal hacia la Izquierda Encima, desde 0,0
+            int numFichasVueltaDIE = logica.getNumFichasDarVuelta(fila, columna, -1, -1);
+            System.out.println("Número de fichas a dar vuelta Diagonal izquierda arriba: " + numFichasVueltaDIE);
             
             turno *= -1;
         }
