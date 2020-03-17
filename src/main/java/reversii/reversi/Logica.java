@@ -6,6 +6,14 @@ package reversii.reversi;
  */
 public class Logica {
     static int [][] cuadricula = new int[8][8];
+    int numFichasVueltaHD;
+    int numFichasVueltaHI;
+    int numFichasVueltaVE;
+    int numFichasVueltaVA;
+    int numFichasVueltaDDA;
+    int numFichasVueltaDDE;
+    int numFichasVueltaDIA;
+    int numFichasVueltaDIE;
     
     public Logica() {
         for(int c=0; c<8; c++) {
@@ -49,19 +57,54 @@ public class Logica {
     
     //Comprobamos el numero de fichas que hay que dar la vuelta y hacemos la animación
     //de dar la vuelta
-    public boolean darVueltaXFichas(int numFichasVueltaHD, int numFichasVueltaVD, int numFichasVueltaDD, int numFichasVueltaDI){
-        if(numFichasVueltaHD >= 1 || numFichasVueltaVD >= 1 || numFichasVueltaDD >= 1 || numFichasVueltaDI >= 1) {
+    public boolean darVueltaXFichas(int numFichasVueltaHD, int numFichasVueltaHI, int numFichasVueltaVE, int numFichasVueltaVA,
+                                    int numFichasVueltaDDA, int numFichasVueltaDDE, int numFichasVueltaDIA, int numFichasVueltaDIE){
+        if(numFichasVueltaHD >= 1 || numFichasVueltaHI >= 1 || numFichasVueltaVE >= 1 || numFichasVueltaVA >= 1 ||
+           numFichasVueltaDDA >= 1 || numFichasVueltaDDE >= 1 || numFichasVueltaDIA >= 1 || numFichasVueltaDIE >= 1) {
             return true;
         } else {
             return false;
         }
     }
 
-
+            //Método para cambiar de color las fichas correspondientes y el jugador
+    public void cambioColorFichasYAnimacion (double escalaFichas, int columna, int fila, int jugador){
+        if(darVueltaXFichas() == true){
+            
+        }
+    }
+    
+    public void comprobarFichasADarVuelta(int fila, int columna){
+                    //Comprueba fichas en Horizontal hacia la Derecha
+            numFichasVueltaHD = this.getNumFichasDarVuelta(fila, columna, 1, 0);
+            System.out.println("Número de fichas a dar vuelta Horizontal Derecha: " + numFichasVueltaHD);
+            //Comprueba fichas en Horizontal hacia la Izquierda
+            numFichasVueltaHI = this.getNumFichasDarVuelta(fila, columna, -1, 0);
+            System.out.println("Número de fichas a dar vuelta Horizontal Izquierda: " + numFichasVueltaHI);
+            //Comprueba fichas en Vertical hacia Encima
+            numFichasVueltaVE = this.getNumFichasDarVuelta(fila, columna, 0, -1);
+            System.out.println("Número de fichas a dar vuelta Vertical Encima: " + numFichasVueltaVE);
+            //Comprueba fichas en Vertical hacia Abajo
+            numFichasVueltaVA = this.getNumFichasDarVuelta(fila, columna, 0, 1);
+            System.out.println("Número de fichas a dar vuelta Vertical Abajo: " + numFichasVueltaVA);
+            //Comprueba fichas en Diagonal hacia la Derecha Abajo, desde 0,0
+            numFichasVueltaDDA = this.getNumFichasDarVuelta(fila, columna, 1, 1);
+            System.out.println("Número de fichas a dar vuelta Diagonal derecha abajo: " + numFichasVueltaDDA);
+            //Comprueba fichas en Diagonal hacia la Derecha Encima, desde 0,0
+            numFichasVueltaDDE = this.getNumFichasDarVuelta(fila, columna, 1, -1);
+            System.out.println("Número de fichas a dar vuelta Diagonal derecha arriba: " + numFichasVueltaDDE);
+            //Comprueba fichas en Diagonal hacia la Izquierda Abajo, desde 0,0
+            numFichasVueltaDIA = this.getNumFichasDarVuelta(fila, columna, -1, 1);
+            System.out.println("Número de fichas a dar vuelta Diagonal izquierda abajo: " + numFichasVueltaDIA);
+            //Comprueba fichas en Diagonal hacia la Izquierda Encima, desde 0,0
+            numFichasVueltaDIE = this.getNumFichasDarVuelta(fila, columna, -1, -1);
+            System.out.println("Número de fichas a dar vuelta Diagonal izquierda arriba: " + numFichasVueltaDIE);
+    }
 
 //    private void conseguirGiro(double escalaFichas){
 //        if (escalaFichas >= -1){
 //            escalaFichas --;
 //        }
 //    }
+
 }

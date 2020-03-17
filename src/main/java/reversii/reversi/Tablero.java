@@ -3,16 +3,13 @@ package reversii.reversi;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import static javafx.scene.paint.Color.RED;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
-import static javafx.util.Duration.seconds;
 import static reversii.reversi.App.TAM_TABLERO;
-import static reversii.reversi.App.errorFicha;
 
 /**
  *
@@ -22,7 +19,8 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
 
     int turno = 1;//El primer turno es del jugador Blanco
     Logica logica;
-    Timeline timeline;
+    Timeline timelineErrorPonerFicha;
+    Timeline timelineGirarFichas;
     App app;
 
     public Tablero(){
@@ -66,13 +64,21 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
             colocarFicha(columna, fila, turno);
 
             logica.mostrarConsola();
-
-//            timeline = new Timeline(
-//                new KeyFrame(Duration.seconds(3), e -> {
-//                    errorFicha.setVisible(true);
-//                })
-//            );
-//            timeline.stop();
+            
+            //Si se coloca ficha donde ya hay una, sale en pantalla un mensaje 3 segundos
+            if (Logica.cuadricula [columna][fila] == 1 || Logica.cuadricula [columna][fila] == -1){
+                timelineErrorPonerFicha = new Timeline(
+                    new KeyFrame(Duration.seconds(3), e -> {
+                        errorFicha.setVisible(true);
+                    })
+                );
+            }
+            timelineGirarFichas = new Timeline(
+                new KeyFrame(Duration.seconds(3), e -> {
+                    logica.cambioColorFichasYAnimacion();
+                })
+            );
+                    
         });
     }
 
@@ -80,7 +86,7 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
         //Comprueba si hay una ficha donde haces click
         if (Logica.cuadricula [columna][fila] == 1 || Logica.cuadricula [columna][fila] == -1){
             System.out.println("No puedes colocar la ficha aquí");
-            timeline.play();
+            timelineErrorPonerFicha.play();
         } else {
             //Coloca la ficha correspondiente, dependiendo del jugador
             Ficha ficha = new Ficha(jugador);
@@ -92,32 +98,11 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
             //Comprobar la cantidad de fichas a las que se le dan la vuelta alrededor de la
             //ficha que acabamos de colocar
             
-            //Comprueba fichas en Horizontal hacia la Derecha
-            int numFichasVueltaHD = logica.getNumFichasDarVuelta(fila, columna, 1, 0);
-            System.out.println("Número de fichas a dar vuelta Horizontal Derecha: " + numFichasVueltaHD);
-            //Comprueba fichas en Horizontal hacia la Izquierda
-            int numFichasVueltaHI = logica.getNumFichasDarVuelta(fila, columna, -1, 0);
-            System.out.println("Número de fichas a dar vuelta Horizontal Izquierda: " + numFichasVueltaHI);
-            //Comprueba fichas en Vertical hacia Encima
-            int numFichasVueltaVE = logica.getNumFichasDarVuelta(fila, columna, 0, -1);
-            System.out.println("Número de fichas a dar vuelta Vertical Encima: " + numFichasVueltaVE);
-            //Comprueba fichas en Vertical hacia Abajo
-            int numFichasVueltaVA = logica.getNumFichasDarVuelta(fila, columna, 0, 1);
-            System.out.println("Número de fichas a dar vuelta Vertical Abajo: " + numFichasVueltaVA);
-            //Comprueba fichas en Diagonal hacia la Derecha Abajo, desde 0,0
-            int numFichasVueltaDDA = logica.getNumFichasDarVuelta(fila, columna, 1, 1);
-            System.out.println("Número de fichas a dar vuelta Diagonal derecha abajo: " + numFichasVueltaDDA);
-            //Comprueba fichas en Diagonal hacia la Derecha Encima, desde 0,0
-            int numFichasVueltaDDE = logica.getNumFichasDarVuelta(fila, columna, 1, -1);
-            System.out.println("Número de fichas a dar vuelta Diagonal derecha arriba: " + numFichasVueltaDDE);
-            //Comprueba fichas en Diagonal hacia la Izquierda Abajo, desde 0,0
-            int numFichasVueltaDIA = logica.getNumFichasDarVuelta(fila, columna, -1, 1);
-            System.out.println("Número de fichas a dar vuelta Diagonal izquierda abajo: " + numFichasVueltaDIA);
-            //Comprueba fichas en Diagonal hacia la Izquierda Encima, desde 0,0
-            int numFichasVueltaDIE = logica.getNumFichasDarVuelta(fila, columna, -1, -1);
-            System.out.println("Número de fichas a dar vuelta Diagonal izquierda arriba: " + numFichasVueltaDIE);
+            logica.comprobarFichasADarVuelta(fila, columna);
             
             turno *= -1;
         }
     }
+    
+
 }

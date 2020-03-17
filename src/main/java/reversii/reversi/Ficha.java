@@ -35,8 +35,5 @@ public class Ficha extends Group {
         double escalaFichas = 1;
         this.setScaleX(escalaFichas);
     }
-    //Método para cambiar de color la ficha cuando la escalaX llega a 0
-    public void cambioColorFichasYAnimacion (double escalaFichas, int columna, int fila, int jugador){
-        
-    }
+
 }
