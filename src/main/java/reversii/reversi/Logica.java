@@ -41,7 +41,8 @@ public class Logica {
         int contadorFichasVueltas = 0;
         int i = 1;
         try{
-            while ((cuadricula[columna + (i * incCol)][fila + (i * incFil)] != jugador &&
+            while ((cuadricula[columna + (i * incCol)][fila + (i * incFil)] != jugador
+                    &&
                     cuadricula[columna + (i * incCol)][fila + (i * incFil)] != 0) ){
                 contadorFichasVueltas ++ ;
                 i++;
@@ -49,30 +50,30 @@ public class Logica {
             if (cuadricula[columna + (i * incCol)][fila + (i * incFil)] != jugador ){
                 contadorFichasVueltas = 0;
             }
-        } catch (Exception x){
-        }
+        } catch (Exception x){}
         
         return contadorFichasVueltas;
     }
     
-    //Comprobamos el numero de fichas que hay que dar la vuelta y hacemos la animación
+    //Comprobamos el numero de fichas que hay que dar la vuelta para hacer luego la animación
     //de dar la vuelta
-    public boolean darVueltaXFichas(int numFichasVueltaHD, int numFichasVueltaHI, int numFichasVueltaVE, int numFichasVueltaVA,
-                                    int numFichasVueltaDDA, int numFichasVueltaDDE, int numFichasVueltaDIA, int numFichasVueltaDIE){
+    public void cambiarJugadorEnMatriz(int columna, int fila, int jugador, int contadorFichasVueltas, int incCol, int incFil){
         if(numFichasVueltaHD >= 1 || numFichasVueltaHI >= 1 || numFichasVueltaVE >= 1 || numFichasVueltaVA >= 1 ||
            numFichasVueltaDDA >= 1 || numFichasVueltaDDE >= 1 || numFichasVueltaDIA >= 1 || numFichasVueltaDIE >= 1) {
-            return true;
-        } else {
-            return false;
+            for(int i=1; i>(contadorFichasVueltas+1); i++){
+                cuadricula[columna + (i * incCol)][fila + (i * incFil)] = jugador;
+            }
         }
     }
 
             //Método para cambiar de color las fichas correspondientes y el jugador
-    public void cambioColorFichasYAnimacion (double escalaFichas, int columna, int fila, int jugador){
-        if(darVueltaXFichas() == true){
-            
-        }
-    }
+//    public void cambiarJugadorEnMatriz (int columna, int fila, int jugador, int contadorFichasVueltas, int incCol, int incFil){
+//        if(comprobarSiDarVueltaFichas() == true){
+//            for(int i=1; i>(contadorFichasVueltas+1); i++){
+//                cuadricula[columna + (i * incCol)][fila + (i * incFil)] = jugador;
+//            }
+//        }
+//    }
     
     public void comprobarFichasADarVuelta(int fila, int columna){
                     //Comprueba fichas en Horizontal hacia la Derecha
@@ -101,6 +102,16 @@ public class Logica {
             System.out.println("Número de fichas a dar vuelta Diagonal izquierda arriba: " + numFichasVueltaDIE);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 //    private void conseguirGiro(double escalaFichas){
 //        if (escalaFichas >= -1){
 //            escalaFichas --;

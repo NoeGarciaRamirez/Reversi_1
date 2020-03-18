@@ -75,7 +75,6 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
             }
             timelineGirarFichas = new Timeline(
                 new KeyFrame(Duration.seconds(3), e -> {
-                    logica.cambioColorFichasYAnimacion();
                 })
             );
                     
@@ -97,8 +96,9 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
             
             //Comprobar la cantidad de fichas a las que se le dan la vuelta alrededor de la
             //ficha que acabamos de colocar
-            
             logica.comprobarFichasADarVuelta(fila, columna);
+            //Cambiar en la matriz a 1 o -1 las fichas necesarias
+            logica.cambiarJugadorEnMatriz(columna, fila, jugador);
             
             turno *= -1;
         }

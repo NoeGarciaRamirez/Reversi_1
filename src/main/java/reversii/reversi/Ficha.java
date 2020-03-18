@@ -10,7 +10,7 @@ import javafx.scene.shape.Circle;
  * @author noe
  */
 public class Ficha extends Group {
-    
+    double escalaFichas = 1;
     Group grupoFicha = new Group();
     static final short TAM_FICHA = 40;
     
@@ -32,7 +32,7 @@ public class Ficha extends Group {
             circle2.setFill(Color.rgb(0, 0, 0));//Negro, jugador 2
         }
         //Para la animación de las fichas que se dan la vuelta
-        double escalaFichas = 1;
+        
         this.setScaleX(escalaFichas);
     }
 
