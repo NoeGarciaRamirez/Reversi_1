@@ -95,14 +95,10 @@ public class Tablero extends Pane{//Meter que se pase tu turno si tardas mas de 
             logica.colocarFicha(columna, fila, jugador);
             
             //Comprobar la cantidad de fichas a las que se le dan la vuelta alrededor de la
-            //ficha que acabamos de colocar
-            logica.comprobarFichasADarVuelta(fila, columna);
-            //Cambiar en la matriz a 1 o -1 las fichas necesarias
-            logica.cambiarJugadorEnMatriz(columna, fila, jugador);
+            //ficha que acabamos de colocar, y cambiamos en la matriz a 1 o -1
+            logica.comprobarFichasADarVuelta(fila, columna, jugador);
             
             turno *= -1;
         }
     }
-    
-
 }
