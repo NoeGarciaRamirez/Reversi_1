@@ -1,4 +1,3 @@
-
 package reversii.reversi;
 
 import javafx.scene.Group;
@@ -35,5 +34,6 @@ public class Ficha extends Group {
         
         this.setScaleX(escalaFichas);
     }
+
 
 }
