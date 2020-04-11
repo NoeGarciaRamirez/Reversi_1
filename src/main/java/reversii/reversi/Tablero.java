@@ -23,6 +23,8 @@ public class Tablero extends Pane{
     App app;
 
     public Tablero(){
+        //Cambiar de color el fondo del tablero
+        this.setStyle("-fx-background-color: lightblue");
         //Label que muestra en pantalla que no puedes colocar la ficha en ese sitio
         Label errorFicha = new Label();
         errorFicha.relocate(TAM_TABLERO/2 - 50, TAM_TABLERO/2 - 50);
@@ -118,6 +120,7 @@ public class Tablero extends Pane{
                     (Ficha.TAM_FICHA)*8, Ficha.TAM_FICHA*i);
             this.getChildren().add(line);
         }
+        this.setStyle("-fx-background-color: lightblue");
         
         //Las 4 fichas del principio de la partida, que están siempre
         colocarFichaT(3, 3, 1);//Blancas

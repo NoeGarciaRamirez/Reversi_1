@@ -22,6 +22,7 @@ public class App extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("Reversi Noé");
         
         
         Tablero tablero = new Tablero();
